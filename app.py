@@ -17,10 +17,6 @@ def upload_audio():
         return jsonify(text=text)
     return jsonify({"error": "No audio file provided"}), 400
 
-# API для обновления текста
-@app.route('/api/upload', methods=['POST'])
-def simple_upload():
-    return jsonify(text='derp_derp_derp')
 
 if __name__ == '__main__':
     app.run(debug=True)
