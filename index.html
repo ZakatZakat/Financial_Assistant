@@ -38,15 +38,17 @@ function sendAudioToServer(audioBlob) {
     const formData = new FormData();
     formData.append("audio", audioBlob);
     
-    fetch("http://your-server.com/api/upload-audio", {
+    fetch("http://127.0.0.1:5000/api/upload-audio", {
         method: "POST",
         body: formData
     })
     .then(response => response.text())
     .then(data => {
-        document.getElementById('text').innerText = data;
+        document.getElementById('text').innerText = data.text;
     });
 }
 </script>
 </body>
 </html>
+
+
