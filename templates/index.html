@@ -8,7 +8,10 @@
 <h1>Распознавание речи в реальном времени</h1>
 <button id="start">Начать запись</button>
 <button id="stop">Остановить запись</button>
+<button id="executeScript">Выполнить скрипт</button>
 <div id="text"></div>
+<div id="analysisResults"></div>
+
 
 <script>
   var recognition = new webkitSpeechRecognition();
@@ -56,6 +59,31 @@
     .then(data => console.log('Data sent successfully', data))
     .catch(error => console.error('Error sending data:', error));
   }
+
+  document.getElementById('executeScript').onclick = function() {
+    fetch("/api/analyse-log", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ /* data to send */ })
+    })
+    .then(response => response.json())
+    .then(data => {
+      displayAnalysisResults(data);
+    })
+    .catch(error => console.error("Failed to execute script.", error));
+  };
+
+  function displayAnalysisResults(data) {
+    // Отображение результатов на странице
+    var resultDiv = document.getElementById('analysisResults');
+    resultDiv.innerHTML = '<h2>Analysis Results:</h2>';
+    for (var key in data) {
+        resultDiv.innerHTML += '<p>' + key + ': ' + data[key] + '</p>';
+    }
+  }
+
 </script>
 </body>
 </html>
