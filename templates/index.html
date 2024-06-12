@@ -2,58 +2,60 @@
 <html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Кастомное ASR</title>
+<title>Распознавание речи</title>
 </head>
 <body>
-<h1>Запись и распознавание речи</h1>
+<h1>Распознавание речи в реальном времени</h1>
 <button id="start">Начать запись</button>
 <button id="stop">Остановить запись</button>
 <div id="text"></div>
 
-
-<button id="updateText">Обновить текст</button> <!-- Новая кнопка для обновления текста -->
-
-
 <script>
-let mediaRecorder;
-let audioChunks = [];
+  var recognition = new webkitSpeechRecognition();
+  recognition.lang = 'ru-RU';
+  recognition.continuous = true;
+  recognition.interimResults = true;
 
-document.getElementById('start').onclick = function() {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-    .then(stream => {
-        mediaRecorder = new MediaRecorder(stream);
-        mediaRecorder.start();
-        mediaRecorder.ondataavailable = function(event) {
-            audioChunks.push(event.data);
-        };
-    });
-};
+  var accumulatedText = '';
+  var sendInterval;
 
-document.getElementById('stop').onclick = function() {
-    mediaRecorder.stop();
-    mediaRecorder.onstop = function() {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
-        sendAudioToServer(audioBlob);
-        audioChunks = [];
-    };
-};
+  document.getElementById('start').onclick = function() {
+    recognition.start();
+    // Начать регулярную отправку данных на сервер
+    sendInterval = setInterval(() => {
+      sendDataToServer(accumulatedText);
+    }, 5000); // Отправлять данные каждую секунду
+  };
 
-function sendAudioToServer(audioBlob) {
-    const formData = new FormData();
-    formData.append("audio", audioBlob);
-    
-    fetch("http://127.0.0.1:5000/api/upload-audio", {
-        method: "POST",
-        body: formData
+  document.getElementById('stop').onclick = function() {
+    recognition.stop();
+    clearInterval(sendInterval); // Остановить регулярную отправку при остановке записи
+  };
+
+  recognition.onresult = function(event) {
+    var interimTranscript = '';
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+        accumulatedText += event.results[i][0].transcript;
+      } else {
+        interimTranscript += event.results[i][0].transcript;
+      }
+    }
+    document.getElementById('text').innerHTML = accumulatedText + '<i>' + interimTranscript + '</i>';
+  };
+
+  function sendDataToServer(text) {
+    fetch("/api/upload-audio", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text: text })
     })
-    .then(response => response.text())
-    .then(data => {
-        document.getElementById('text').innerText = data.text;
-    });
-}
-
+    .then(response => response.json())
+    .then(data => console.log('Data sent successfully', data))
+    .catch(error => console.error('Error sending data:', error));
+  }
 </script>
 </body>
 </html>
-
-

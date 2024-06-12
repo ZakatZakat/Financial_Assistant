@@ -7,16 +7,12 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-# API для обработки аудио
 @app.route('/api/upload-audio', methods=['POST'])
 def upload_audio():
-    if 'audio' in request.files:
-        audio_file = request.files['audio']
-        # Обработка файла аудио вашей ASR моделью
-        text = 'Пример распознанного текста'
-        return jsonify(text=text)
-    return jsonify({"error": "No audio file provided"}), 400
-
+    data = request.get_json()
+    print(data['text'])
+    #print("Received text:", text)  # Здесь можно добавить обработку текста
+    return jsonify(status="success")
 
 if __name__ == '__main__':
     app.run(debug=True)
