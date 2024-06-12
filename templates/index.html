@@ -10,6 +10,10 @@
 <button id="stop">Остановить запись</button>
 <div id="text"></div>
 
+
+<button id="updateText">Обновить текст</button> <!-- Новая кнопка для обновления текста -->
+
+
 <script>
 let mediaRecorder;
 let audioChunks = [];
@@ -47,6 +51,21 @@ function sendAudioToServer(audioBlob) {
         document.getElementById('text').innerText = data.text;
     });
 }
+
+document.getElementById('updateText').onclick = function() {
+    fetch("http://127.0.0.1:5000/api/upload", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.json())
+    .then(text => {
+        console.log("Received response text:", text); // Логирование текста ответа
+    })
+    .catch(error => {
+        console.error("Error fetching data:", error); // Логирование ошибки, если запрос не удался
+    });
+};
+
 </script>
 </body>
 </html>
