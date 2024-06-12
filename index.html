@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Кастомное ASR</title>
+</head>
+<body>
+<h1>Запись и распознавание речи</h1>
+<button id="start">Начать запись</button>
+<button id="stop">Остановить запись</button>
+<div id="text"></div>
+
+<script>
+let mediaRecorder;
+let audioChunks = [];
+
+document.getElementById('start').onclick = function() {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+        mediaRecorder = new MediaRecorder(stream);
+        mediaRecorder.start();
+        mediaRecorder.ondataavailable = function(event) {
+            audioChunks.push(event.data);
+        };
+    });
+};
+
+document.getElementById('stop').onclick = function() {
+    mediaRecorder.stop();
+    mediaRecorder.onstop = function() {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        sendAudioToServer(audioBlob);
+        audioChunks = [];
+    };
+};
+
+function sendAudioToServer(audioBlob) {
+    const formData = new FormData();
+    formData.append("audio", audioBlob);
+    
+    fetch("http://your-server.com/api/upload-audio", {
+        method: "POST",
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('text').innerText = data;
+    });
+}
+</script>
+</body>
+</html>
