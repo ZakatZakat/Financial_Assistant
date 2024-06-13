@@ -1,50 +1,27 @@
-from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, DistilBertTokenizer, DistilBertForSequenceClassification
-import torch
+from test_pipe import preprocess, translation_pipeline, sentiment_tempreture
 
-tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-ru-en")
-model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-ru-en")
-
-with open('saved_log/log.txt', 'r') as file:
-    rows = file.readlines()
-    last_row = rows[-1].strip() if rows else None
-    if last_row is None:
-        print("File is empty.")
-
-    file.close()
-
-input_ids = tokenizer.encode(last_row, return_tensors="pt")
-translation = model.generate(input_ids)
-translated_text = tokenizer.decode(translation[0], skip_special_tokens=True)
-
-# Load the pre-trained model and tokenizer
-tokenizer = DistilBertTokenizer.from_pretrained('joeddav/distilbert-base-uncased-go-emotions-student')
-model = DistilBertForSequenceClassification.from_pretrained('joeddav/distilbert-base-uncased-go-emotions-student')
-
-# Encode a text input
-input_text = translated_text
-input_ids = tokenizer.encode(input_text, return_tensors='pt')
-
-# Generate an output
-# Generate an output
-with torch.no_grad():
-    output = model(input_ids)
-    logits = output.logits
-    top_k_values, top_k_indices = torch.topk(logits, k=5, dim=-1)
+def calculate_normalized_metric(sentiment_scores):
+    # Определение весов для каждого настроения
+    weights = {
+        'negative': -1,
+        'neutral': 0,
+        'positive': 1
+    }
     
-    emotions = ['admiration', 'amusement', 'anger', 'bother', 'approval', 'caring', 'confusion', 'curiosity', 'desire', 'disapproval', 
-                'disappointment', 'disgust', 'embarrassment', 'excitement', 'fear', 'gratitude', 'grief', 'joy', 'love', 'nervousness', 
-                'optimism', 'pride', 'realization', 'relief', 'remorse', 'sadness', 'surprise', 'neutral']
+    # Вычисление взвешенной суммы сентимента
+    weighted_sum_scores = sum(weights[sentiment['label']] * sentiment['score'] for sentiment in sentiment_scores)
     
-    predicted_emotions_scores = []
-    for i in range(top_k_indices.size(0)):
-        predicted_emotions = [emotions[idx] for idx in top_k_indices[i]]
-        predicted_scores = top_k_values[i].tolist()
-        formatted_emotions_scores = {emotion: score for emotion, score in zip(predicted_emotions, predicted_scores)}
-        predicted_emotions_scores.append(formatted_emotions_scores)
+    # Определение минимального и максимального значений сентимента
+    min_sentiment = -1
+    max_sentiment = 1
     
-    for i, emotions_scores in enumerate(predicted_emotions_scores):
-        print(f"Top 5 Predicted Emotions:")
-        for emotion, score in emotions_scores.items():
-            print(f"{emotion}: {score:.4f}")
+    # Нормализация сентимента к масштабу [0, 1]
+    normalized_metric = (weighted_sum_scores - min_sentiment) / (max_sentiment - min_sentiment)
+    return normalized_metric
 
+def sentiment_metrics(result):
+    sentiment_scores = sentiment_tempreture(result)
+
+    normalized_metric = calculate_normalized_metric(sentiment_scores)
+    return normalized_metric
 

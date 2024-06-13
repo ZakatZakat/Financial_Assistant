@@ -1,14 +1,7 @@
 from transformers import pipeline
 import json
 
-def test_pipeline():
-    # Create a pipeline for sequence-to-sequence translation
-    translation_pipeline = pipeline("translation", model="Helsinki-NLP/opus-mt-ru-en")
-
-    # Create a pipeline for text classification
-    classification_pipeline = pipeline("text-classification", model="joeddav/distilbert-base-uncased-go-emotions-student")
-
-    # Define a dictionary to map English labels to Russian labels
+def preprocess():
     label_mapping = {
         "admiration": "восхищение",
         "amusement": "развлечение",
@@ -47,19 +40,28 @@ def test_pipeline():
             print("File is empty.")
 
         file.close()
+    return last_row, label_mapping
 
-    # Perform sequence-to-sequence translation
-    translated_text = translation_pipeline(last_row)[0]['translation_text']
+def sentiment_tempreture(text):
+    sentiment_pipeline = pipeline("sentiment-analysis", model='ProsusAI/finbert')
+
+    result = sentiment_pipeline(text, top_k=3)
+    return result
+
+def translation_pipeline(text):
+    translation_pipeline = pipeline("translation", model="Helsinki-NLP/opus-mt-ru-en")
+    translated_text = translation_pipeline(text)[0]['translation_text']
+    return translated_text
+
+def emotion_pipeline(text, label_mapping):
+    # Create a pipeline for text classification
+    classification_pipeline = pipeline("text-classification", model="joeddav/distilbert-base-uncased-go-emotions-student")
 
     # Perform text classification
-    results = classification_pipeline(translated_text, top_k=5)
+    results = classification_pipeline(text, top_k=5)
 
     # Create a dictionary to store the results in the desired format
     formatted_results = {label_mapping.get(result['label'], result['label']): result['score'] for result in results}
 
     # Convert the dictionary to JSON and print the output
-    json_output = json.dumps(formatted_results, ensure_ascii=False, indent=4)
-    return json_output
-
-# Call the function
-#test_pipeline()
+    return formatted_results

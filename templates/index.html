@@ -3,14 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Распознавание речи</title>
+<style>
+  #temperatureIndicator {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 18px;
+  }
+</style>
 </head>
 <body>
 <h1>Распознавание речи в реальном времени</h1>
 <button id="start">Начать запись</button>
 <button id="stop">Остановить запись</button>
-<button id="executeScript">Выполнить скрипт</button>
 <div id="text"></div>
 <div id="analysisResults"></div>
+<div id="temperatureIndicator">Температура клиента: <span id="temperatureValue"></span></div>
+
 
 
 <script>
@@ -47,20 +56,8 @@
     document.getElementById('text').innerHTML = accumulatedText + '<i>' + interimTranscript + '</i>';
   };
 
-  function sendDataToServer(text) {
-    fetch("/api/upload-audio", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ text: text })
-    })
-    .then(response => response.json())
-    .then(data => console.log('Data sent successfully', data))
-    .catch(error => console.error('Error sending data:', error));
-  }
-
-  document.getElementById('executeScript').onclick = function() {
+    // Execute displayAnalysisResults every 10 seconds
+    setInterval(() => {
     fetch("/api/analyse-log", {
       method: "POST",
       headers: {
@@ -72,15 +69,32 @@
     .then(data => {
       displayAnalysisResults(data);
     })
-    .catch(error => console.error("Failed to execute script.", error));
-  };
+    .catch(error => console.error("Failed to fetch analysis results.", error));
+  }, 10000); // Execute every 10 seconds
+
+  function sendDataToServer(text) {
+    fetch("/api/upload-audio", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Error sending data:', error));
+  }
 
   function displayAnalysisResults(data) {
-    // Отображение результатов на странице
+    // Обновление значения температуры клиента на основе sentiment_score
+    document.getElementById('temperatureValue').textContent = data.sentiment_score;
+
+    // Отображение результатов эмоций на странице
     var resultDiv = document.getElementById('analysisResults');
     resultDiv.innerHTML = '<h2>Analysis Results:</h2>';
-    for (var key in data) {
-        resultDiv.innerHTML += '<p>' + key + ': ' + data[key] + '</p>';
+    
+    var emotions = data.emotions_scores;
+    for (var key in emotions) {
+        resultDiv.innerHTML += '<p>' + key + ': ' + emotions[key] + '</p>';
     }
   }
 
