@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import os
-from Pipelines import preprocess, emotion_pipeline, translation_pipeline_rus_eng, translation_pipeline_eng_rus, summarization_pipeline
+from pipelines import preprocess, emotion_pipeline, translation_pipeline_rus_eng, translation_pipeline_eng_rus, summarization_pipeline
 import json
-from Metrics import sentiment_metrics
+from metrics import sentiment_metrics
 
 app = Flask(__name__)
 
