@@ -1,8 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 import os
-from test_pipe import preprocess, emotion_pipeline, translation_pipeline
+from Pipelines import preprocess, emotion_pipeline, translation_pipeline_rus_eng, translation_pipeline_eng_rus, summarization_pipeline
 import json
-from test import sentiment_metrics
+from Metrics import sentiment_metrics
 
 app = Flask(__name__)
 
@@ -15,7 +15,6 @@ def index():
 def upload_audio():
     data = request.get_json()
     text = data['text']
-    print(text)
     log_file_path = os.path.join('saved_log', 'log.txt')
     with open(log_file_path, 'a') as log_file:
         log_file.write(text + '\n')
@@ -25,11 +24,8 @@ def upload_audio():
 @app.route('/api/analyse-log', methods=['POST'])
 def analyse_log():
     result, label_mapping = preprocess()
-    
-    translated_text = translation_pipeline(result)
-    
+    translated_text = translation_pipeline_rus_eng(result)
     sentiment_score = sentiment_metrics(translated_text)
-
     emotions_scores = emotion_pipeline(translated_text, label_mapping)
 
     response = {
@@ -39,7 +35,13 @@ def analyse_log():
 
     return jsonify(response)
 
-
+@app.route('/api/summarize', methods=['POST'])
+def summarizate_log():
+    result, _ = preprocess()
+    translated_text_eng_rus = translation_pipeline_rus_eng(result)
+    summarized_text = summarization_pipeline(translated_text_eng_rus)
+    translated_text_rus_eng = translation_pipeline_eng_rus(summarized_text)
+    return jsonify(translated_text_rus_eng)
 
 if __name__ == '__main__':
     app.run(debug=True)
