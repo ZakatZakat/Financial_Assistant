@@ -1,4 +1,4 @@
-from test_pipe import preprocess, translation_pipeline, sentiment_tempreture
+from Pipelines import preprocess, sentiment_tempreture
 
 def calculate_normalized_metric(sentiment_scores):
     # Определение весов для каждого настроения

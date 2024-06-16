@@ -16,9 +16,11 @@
 <h1>Распознавание речи в реальном времени</h1>
 <button id="start">Начать запись</button>
 <button id="stop">Остановить запись</button>
+<button id="summarize">Сделать саммари текста</button>
 <div id="text"></div>
 <div id="analysisResults"></div>
 <div id="temperatureIndicator">Температура клиента: <span id="temperatureValue"></span></div>
+<div id="summarizedText"></div>
 
 
 
@@ -38,6 +40,21 @@
       sendDataToServer(accumulatedText);
     }, 5000); // Отправлять данные каждую секунду
   };
+
+  document.getElementById('summarize').onclick = function() {
+    fetch("/api/summarize", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text: text })
+    })
+    .then(response => response.json())
+    .then(data => {
+      displaySummaryResults(data);
+    })
+    .catch(error => console.error('Error:', error));
+  }
 
   document.getElementById('stop').onclick = function() {
     recognition.stop();
@@ -90,12 +107,18 @@
 
     // Отображение результатов эмоций на странице
     var resultDiv = document.getElementById('analysisResults');
-    resultDiv.innerHTML = '<h2>Analysis Results:</h2>';
+    resultDiv.innerHTML = '<h2>Результаты по эмоциональным коэффициентам:</h2>';
     
     var emotions = data.emotions_scores;
     for (var key in emotions) {
         resultDiv.innerHTML += '<p>' + key + ': ' + emotions[key] + '</p>';
     }
+  }
+
+  function displaySummaryResults(data) {
+    var resultDiv = document.getElementById('summarizedText');
+    resultDiv.innerHTML = '<h2>Результаты саммари:</h2>';
+    resultDiv.innerHTML += '<p>' + data + '</p>';
   }
 
 </script>
