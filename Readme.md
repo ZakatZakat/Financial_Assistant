@@ -166,8 +166,11 @@
 
 ## Установка и запуск
 Для начала работы с проектом:
-1. Клонируйте репозиторий.
+1. Клонируйте репозиторий: git clone https://github.com/ZakatZakat/Financial_Assistant.git
 2. Установите зависимости.
-3. Запустите сервер командой:
+   cd repository
+   pip install -r requirements.txt
+4. Запустите сервер командой:
+   python app.py
 
 
