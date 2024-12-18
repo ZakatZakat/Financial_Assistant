@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_from_directory
 import os
 from Pipelines import preprocess, emotion_pipeline, translation_pipeline_rus_eng, translation_pipeline_eng_rus, summarization_pipeline
 import json
@@ -6,9 +6,13 @@ from Metrics import sentiment_metrics
 
 app = Flask(__name__)
 
+@app.context_processor
+def inject_static_url():
+    return dict(static_url=app.static_url_path)
+
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('in_zapis.html')
 
 
 @app.route('/api/upload-audio', methods=['POST'])
@@ -40,8 +44,8 @@ def summarizate_log():
     result, _ = preprocess()
     translated_text_eng_rus = translation_pipeline_rus_eng(result)
     summarized_text = summarization_pipeline(translated_text_eng_rus)
-    translated_text_rus_eng = translation_pipeline_eng_rus(summarized_text)
-    return jsonify(translated_text_rus_eng)
+    #translated_text_rus_eng = translation_pipeline_eng_rus(summarized_text)
+    return jsonify(summarized_text)
 
 if __name__ == '__main__':
     app.run(debug=True)
