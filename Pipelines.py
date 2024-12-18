@@ -1,5 +1,16 @@
 from transformers import pipeline
-import json
+import os
+from openai import OpenAI
+import pprint
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI(
+    # This is the default and can be omitted
+    api_key=os.getenv("OPENAI_API_KEY"),
+)
+
 
 def preprocess():
     label_mapping = {
@@ -72,11 +83,21 @@ def emotion_pipeline(text, label_mapping):
     return formatted_results
 
 def summarization_pipeline(text):
-    # Создание объекта pipeline для суммаризации
-    summarizer = pipeline("summarization", model="slauw87/bart_summarisation")
-
-    # Выполнение суммаризации
-    summary = summarizer(text, max_length=150, min_length=40, length_penalty=2.0, num_beams=4, early_stopping=True)
+    message_content = f'''Для полученного текста {text} сформулируй отчет и распиши, о чем был данный переговор менеджера и клиента
+    '''
+        
+        # Отправка запроса к API
+    chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": message_content
+                }
+            ],
+            model="gpt-4o-mini",
+        )
+        
+        # Вывод и сохранение результата
+    result_content = chat_completion.choices[0].message.content
     
-    # Возвращение суммаризированного текста
-    return summary[0]['summary_text']
+    return result_content
