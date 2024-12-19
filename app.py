@@ -62,24 +62,28 @@ def analyse_log():
     
     
     result = preprocess()
-    print(result)
-    emotion_pars = emotions_pipeline(result, label_mapping)
+    translated_text_eng_rus = translation_pipeline_rus_eng(result)
+    print(translated_text_eng_rus)
+    emotion_pars = emotions_pipeline(translated_text_eng_rus, label_mapping)
     print(emotion_pars)
-    emotion_scores = emotion_pipeline(emotion_pars)
+    #emotion_scores = emotion_pipeline(emotion_pars)
     
 
     response = {
         'sentiment_score': emotion_pars,
-        'emotions_scores': emotion_scores
+        #'emotions_scores': emotion_scores
     }
 
     return jsonify(response)
 
 @app.route('/api/summarize', methods=['POST'])
 def summarizate_log():
+    data = request.get_json()
+    command = data['command']
+    print(data)
     result = preprocess()
     #translated_text_eng_rus = translation_pipeline_rus_eng(result)
-    summarized_text = summarization_pipeline(result)
+    summarized_text = summarization_pipeline(result, command)
     #translated_text_rus_eng = translation_pipeline_eng_rus(summarized_text)
     return jsonify(summarized_text)
 

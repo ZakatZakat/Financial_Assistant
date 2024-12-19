@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Speech Recognition</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        h1 {
+            color: #333;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            min-height: 100px;
+        }
+        #output p {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button#startButton {
+            background-color: #28a745;
+            color: white;
+        }
+        button#stopButton {
+            background-color: #dc3545;
+            color: white;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>Распознавание речи в реальном времени</h1>
+    <button id="startButton">Начать запись</button>
+    <button id="stopButton" disabled>Остановить запись</button>
+    <div id="output">
+        <h2>Распознанный текст:</h2>
+        <p id="transcription"></p>
+    </div>
+
+    <script>
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+        const transcriptionOutput = document.getElementById('transcription');
+        
+        let mediaRecorder;
+        let socket;
+
+        startButton.addEventListener('click', async () => {
+            // Инициализация WebSocket
+            socket = new WebSocket('ws://127.0.0.1:8765');
+
+            socket.onopen = () => {
+                console.log("WebSocket connected");
+            };
+
+            socket.onmessage = (event) => {
+                // Получение текста от сервера
+                const receivedText = event.data;
+                transcriptionOutput.innerText += receivedText + " ";
+            };
+
+            socket.onerror = (error) => {
+                console.error("WebSocket error:", error);
+            };
+
+            socket.onclose = () => {
+                console.log("WebSocket disconnected");
+            };
+
+            // Захват аудио
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = async (event) => {
+                if (socket.readyState === WebSocket.OPEN) {
+                    const audioBlob = event.data;
+                    const arrayBuffer = await audioBlob.arrayBuffer();
+                    socket.send(arrayBuffer); // Отправляем данные на сервер
+                }
+            };
+
+            mediaRecorder.start(250); // Захват аудио каждые 250 мс
+            startButton.disabled = true;
+            stopButton.disabled = false;
+        });
+
+        stopButton.addEventListener('click', () => {
+            mediaRecorder.stop();
+            socket.close();
+            startButton.disabled = false;
+            stopButton.disabled = true;
+        });
+    </script>
+</body>
+</html>

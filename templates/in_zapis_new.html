@@ -512,27 +512,19 @@
               <!--/.bg-holder-->
           
               <div class="card-header">
-                <h5 class="text-primary">Общая тональность</h5>
+                <h5 class="text-primary">Эмоциональные параметры</h5>
               </div>
-              <div class="card-body" style="padding: 20px; font-size: 18px; line-height: 1.5;">
-                <p class="fs-10 text-800" id="emotions-output" style="font-size: 18px; padding: 10px;  border-radius: 5px;">
+              <div class="card-body" style="padding: 20px; font-size: 14px; line-height: 1.5;">
+                <p class="fs-10 text-800" id="emotions-output" style="font-size: 16px; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
                   Здесь будет отображаться результат анализа эмоций.
                 </p>
               </div>
-
-              
-              
-
-              
-              </div>
             </div>
-          
-            
           </div>
           
           
           <div class="row g-3 mb-3">
-            <div class="col-sm-9">
+            <div class="col-sm-13">
               <div class="card overflow-hidden" style="min-width: 12rem">
                 <div class="bg-holder bg-card" style="background-image:url({{ static_url }}/assets/img/icons/spot-illustrations/corner-2.png);">
                 </div>
@@ -542,32 +534,15 @@
                   <h6>Саммари текста</h6>
 
                   <div class="card-body" style="padding: 20px; font-size: 14px; line-height: 1.5;">
-                    <p class="fs-10 text-800" id="summary-output" style="font-size: 16px; padding: 10px;  border-radius: 5px;">
+                    <p class="fs-10 text-800" id="summary-output" style="font-size: 16px; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
                       Здесь будет отображаться краткое саммари переговоров.
                     </p>
                   </div>
 
                 </div>
-                
               </div>
             </div>
-            <div class="col-sm-3">
-              <div class="card overflow-hidden" style="min-width: 12rem">
-                <div class="bg-holder bg-card" style="background-image:url({{ static_url }}/assets/img/icons/spot-illustrations/corner-1.png);">
-                </div>
-                <!--/.bg-holder-->
 
-                <div class="card-body position-relative">
-                  <h6>Кастомизация Отчета</h6>
-
-                  <div class="card-body" style="padding: 20px; font-size: 14px; line-height: 1.5;">
-                    <textarea id="customization-input" style="width: 100%; height: 100px; font-size: 14px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" placeholder="Введите команду для кастомизации отчета саммари"></textarea>
-                  </div>
-
-                </div>
-                
-              </div>
-            </div>
           </div>
 
           
@@ -587,7 +562,7 @@
               recognition.start();
               sendInterval = setInterval(() => {
                   sendDataToServer(accumulatedText);
-              }, 1000); // Отправлять данные каждые 5 секунд
+              }, 5000); // Отправлять данные каждые 5 секунд
               document.querySelector('#recognized-text1').textContent = 'Идет запись...';
           };
           
@@ -605,7 +580,7 @@
                   headers: {
                       'Content-Type': 'application/json'
                   },
-                  body: JSON.stringify({ text: accumulatedText , command: document.querySelector('#customization-input').value})
+                  body: JSON.stringify({ text: accumulatedText })
               })
                   .then(response => response.json())
                   .then(data => {
@@ -621,12 +596,11 @@
                   headers: {
                       'Content-Type': 'application/json'
                   },
-                  body: JSON.stringify({ text: accumulatedText})
+                  body: JSON.stringify({ text: accumulatedText })
               })
                   .then(response => response.json())
                   .then(data => {
-                      //displayAnalysisResults(data);
-                      displayEnalysisResults(data);
+                      displayAnalysisResults(data);
                   })
                   .catch(error => console.error('Error:', error));
           };
@@ -657,16 +631,45 @@
                   .catch(error => console.error('Error sending data:', error));
           }
           
+          function displayAnalysisResults(data) {
+            var resultDiv = document.querySelector('#emotions-output');
+            resultDiv.innerHTML = ''; // Очищаем текущий текст
 
-          function displayEnalysisResults(data) {
-              var resultDiv = document.querySelector('#emotions-output');
-              resultDiv.innerHTML = ''; // Очищаем текущий текст
-              //resultDiv.innerHTML += '<h2>Эмоции:</h2>';
-              Object.keys(data.sentiment_score).forEach(key => {
-                  resultDiv.innerHTML += `<p>${key}: ${data.sentiment_score[key]}</p>`;
-              });
-          }
+            try {
+                // Разделяем текст на строки
+                var lines = data.emotions_scores.split('\n');
+                var ul = document.createElement('ul'); // Создаём список
 
+                // Добавляем стиль для увеличения текста
+                ul.style.fontSize = '1.5em';
+                ul.style.lineHeight = '1.8em';
+
+                // Обрабатываем строки
+                lines.forEach(line => {
+                    // Ищем строки, содержащие эмоции и проценты
+                    var match = line.match(/(Радость|Грусть|Гнев|Страх|Удивление):\s*([\d.]+)%/);
+                    if (match) {
+                        var emotion = match[1];
+                        var score = match[2];
+                        
+                        // Добавляем эмоцию и её значение в список
+                        var li = document.createElement('li');
+                        li.textContent = ${emotion}: ${score}%;
+                        ul.appendChild(li);
+                    }
+                });
+
+                // Если список успешно создан, добавляем его в контейнер
+                resultDiv.appendChild(ul);
+            } catch (error) {
+                console.error("Ошибка обработки данных:", error);
+
+                // Если произошла ошибка, выводим исходный текст
+                resultDiv.innerHTML = <p>${data.emotions_scores}</p>;
+                resultDiv.style.fontSize = '1.5em'; // Увеличиваем размер шрифта для читаемости
+            }
+        }
+          
           // Отображение результатов саммари
           function displaySummaryResults(data) {
               var summaryOutput = document.querySelector('#summary-output');
@@ -675,9 +678,6 @@
                 .replace(/(\s+)<strong>/g, '&nbsp;<strong>'); // Заменяет начальный пробел на неразрывный пробел для форматирования
               summaryOutput.innerHTML = `<h2>Саммари текста:</h2><p>${formattedData}</p>`;
           }
-
-
-          
           </script>
 
   
@@ -960,8 +960,6 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{{ static_url }}/vendors/list.js/list.min.js"></script>
     <script src="{{ static_url }}/assets/js/theme.js"></script>
-
-  
 
 
 </body>

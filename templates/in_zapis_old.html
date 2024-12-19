@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ static_url }}/assets/img/favicons/favicon-16x16.png">
     <link rel="shortcut icon" type="image/x-icon" href="{{ static_url }}/assets/img/favicons/favicon.ico">
     <link rel="manifest" href="{{ static_url }}/assets/img/favicons/manifest.json">
-    <meta name="msapplication-TileImage" content="{{ static_url }}/assets/img/favicons/mstile-150x150.png">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
     <meta name="theme-color" content="#ffffff">
     <script src="{{ static_url }}/assets/js/config.js"></script>
     <script src="{{ static_url }}/vendors/simplebar/simplebar.min.js"></script>
@@ -75,11 +75,129 @@
               <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip" data-bs-placement="left" aria-label="Toggle Navigation" data-bs-original-title="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
 
             </div><a class="navbar-brand" href="index.html">
-              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ static_url }}/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40"><span class="font-sans-serif text-primary">AI AMA</span>
+              <div class="d-flex align-items-center py-3"><img class="me-2" src="{{ static_url }}/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40"><span class="font-sans-serif text-primary">falcon</span>
               </div>
             </a>
           </div>
-
+          <div class="navbar-collapse collapse show" id="navbarVerticalCollapse" style="">
+            <div class="navbar-vertical-content scrollbar">
+              <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+                <li class="nav-item">
+                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#dashboard" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="dashboard">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><svg class="svg-inline--fa fa-chart-pie fa-w-17" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chart-pie" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 544 512" data-fa-i2svg=""><path fill="currentColor" d="M527.79 288H290.5l158.03 158.03c6.04 6.04 15.98 6.53 22.19.68 38.7-36.46 65.32-85.61 73.13-140.86 1.34-9.46-6.51-17.85-16.06-17.85zm-15.83-64.8C503.72 103.74 408.26 8.28 288.8.04 279.68-.59 272 7.1 272 16.24V240h223.77c9.14 0 16.82-7.68 16.19-16.8zM224 288V50.71c0-9.55-8.39-17.4-17.84-16.06C86.99 51.49-4.1 155.6.14 280.37 4.5 408.51 114.83 513.59 243.03 511.98c50.4-.63 96.97-16.87 135.26-44.03 7.9-5.6 8.42-17.23 1.57-24.08L224 288z"></path></svg><!-- <span class="fas fa-chart-pie"></span> Font Awesome fontawesome.com --></span><span class="nav-link-text ps-1">Dashboard</span>
+                    </div>
+                  </a>
+                  <ul class="nav collapse show" id="dashboard">
+                    <li class="nav-item"><a class="nav-link" href="{{ static_url }}/index.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Default</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="{{ static_url }}/dashboard/analytics.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Analytics</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard/crm.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">CRM</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard/e-commerce.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">E commerce</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard/lms.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">LMS</span><span class="badge rounded-pill ms-2 badge-subtle-success">New</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link active" href="dashboard/project-management.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Management</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard/saas.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">SaaS</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard/support-desk.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Support desk</span><span class="badge rounded-pill ms-2 badge-subtle-success">New</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                  </ul>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                  <!-- label-->
+                  <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                    <div class="col-auto navbar-vertical-label">Документация</div>
+                    <div class="col ps-0">
+                      <hr class="mb-0 navbar-vertical-divider">
+                    </div>
+                  </div>
+                  <!-- parent pages--><a class="nav-link" href="documentation/getting-started.html" role="button">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><svg class="svg-inline--fa fa-rocket fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="rocket" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M505.12019,19.09375c-1.18945-5.53125-6.65819-11-12.207-12.1875C460.716,0,435.507,0,410.40747,0,307.17523,0,245.26909,55.20312,199.05238,128H94.83772c-16.34763.01562-35.55658,11.875-42.88664,26.48438L2.51562,253.29688A28.4,28.4,0,0,0,0,264a24.00867,24.00867,0,0,0,24.00582,24H127.81618l-22.47457,22.46875c-11.36521,11.36133-12.99607,32.25781,0,45.25L156.24582,406.625c11.15623,11.1875,32.15619,13.15625,45.27726,0l22.47457-22.46875V488a24.00867,24.00867,0,0,0,24.00581,24,28.55934,28.55934,0,0,0,10.707-2.51562l98.72834-49.39063c14.62888-7.29687,26.50776-26.5,26.50776-42.85937V312.79688c72.59753-46.3125,128.03493-108.40626,128.03493-211.09376C512.07526,76.5,512.07526,51.29688,505.12019,19.09375ZM384.04033,168A40,40,0,1,1,424.05,128,40.02322,40.02322,0,0,1,384.04033,168Z"></path></svg><!-- <span class="fas fa-rocket"></span> Font Awesome fontawesome.com --></span><span class="nav-link-text ps-1">Начальная информация</span>
+                    </div>
+                  </a>
+                  <!-- parent pages--><a class="nav-link dropdown-indicator" href="#customization" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="customization">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><svg class="svg-inline--fa fa-wrench fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="wrench" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M507.73 109.1c-2.24-9.03-13.54-12.09-20.12-5.51l-74.36 74.36-67.88-11.31-11.31-67.88 74.36-74.36c6.62-6.62 3.43-17.9-5.66-20.16-47.38-11.74-99.55.91-136.58 37.93-39.64 39.64-50.55 97.1-34.05 147.2L18.74 402.76c-24.99 24.99-24.99 65.51 0 90.5 24.99 24.99 65.51 24.99 90.5 0l213.21-213.21c50.12 16.71 107.47 5.68 147.37-34.22 37.07-37.07 49.7-89.32 37.91-136.73zM64 472c-13.25 0-24-10.75-24-24 0-13.26 10.75-24 24-24s24 10.74 24 24c0 13.25-10.75 24-24 24z"></path></svg><!-- <span class="fas fa-wrench"></span> Font Awesome fontawesome.com --></span><span class="nav-link-text ps-1">Кастомизация</span>
+                    </div>
+                  </a>
+                  <ul class="nav collapse" id="customization">
+                    <li class="nav-item"><a class="nav-link" href="documentation/customization/configuration.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Configuration</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="documentation/customization/styling.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Styling</span><span class="badge rounded-pill ms-2 badge-subtle-success">Updated</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="documentation/customization/dark-mode.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Dark mode</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="documentation/customization/plugin.html">
+                        <div class="d-flex align-items-center"><span class="nav-link-text ps-1">Plugin</span>
+                        </div>
+                      </a>
+                      <!-- more inner pages-->
+                    </li>
+                  </ul>
+                  <!-- parent pages--><a class="nav-link" href="documentation/faq.html" role="button">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><svg class="svg-inline--fa fa-question-circle fa-w-16" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="question-circle" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M504 256c0 136.997-111.043 248-248 248S8 392.997 8 256C8 119.083 119.043 8 256 8s248 111.083 248 248zM262.655 90c-54.497 0-89.255 22.957-116.549 63.758-3.536 5.286-2.353 12.415 2.715 16.258l34.699 26.31c5.205 3.947 12.621 3.008 16.665-2.122 17.864-22.658 30.113-35.797 57.303-35.797 20.429 0 45.698 13.148 45.698 32.958 0 14.976-12.363 22.667-32.534 33.976C247.128 238.528 216 254.941 216 296v4c0 6.627 5.373 12 12 12h56c6.627 0 12-5.373 12-12v-1.333c0-28.462 83.186-29.647 83.186-106.667 0-58.002-60.165-102-116.531-102zM256 338c-25.365 0-46 20.635-46 46 0 25.364 20.635 46 46 46s46-20.636 46-46c0-25.365-20.635-46-46-46z"></path></svg><!-- <span class="fas fa-question-circle"></span> Font Awesome fontawesome.com --></span><span class="nav-link-text ps-1">FAQ</span>
+                    </div>
+                  </a>
+                  <!-- parent pages-->
+                  <!-- parent pages-->
+                  <!-- parent pages--><a class="nav-link" href="changelog.html" role="button">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><svg class="svg-inline--fa fa-code-branch fa-w-12" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="code-branch" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M384 144c0-44.2-35.8-80-80-80s-80 35.8-80 80c0 36.4 24.3 67.1 57.5 76.8-.6 16.1-4.2 28.5-11 36.9-15.4 19.2-49.3 22.4-85.2 25.7-28.2 2.6-57.4 5.4-81.3 16.9v-144c32.5-10.2 56-40.5 56-76.3 0-44.2-35.8-80-80-80S0 35.8 0 80c0 35.8 23.5 66.1 56 76.3v199.3C23.5 365.9 0 396.2 0 432c0 44.2 35.8 80 80 80s80-35.8 80-80c0-34-21.2-63.1-51.2-74.6 3.1-5.2 7.8-9.8 14.9-13.4 16.2-8.2 40.4-10.4 66.1-12.8 42.2-3.9 90-8.4 118.2-43.4 14-17.4 21.1-39.8 21.6-67.9 31.6-10.8 54.4-40.7 54.4-75.9zM80 64c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16zm0 384c-8.8 0-16-7.2-16-16s7.2-16 16-16 16 7.2 16 16-7.2 16-16 16zm224-320c8.8 0 16 7.2 16 16s-7.2 16-16 16-16-7.2-16-16 7.2-16 16-16z"></path></svg><!-- <span class="fas fa-code-branch"></span> Font Awesome fontawesome.com --></span><span class="nav-link-text ps-1">Changelog</span>
+                    </div>
+                  </a>
+                </li>
+              </ul>
+              
+            </div>
+          </div>
         </nav>
         
         
@@ -88,7 +206,7 @@
 
             <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="true" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
             <a class="navbar-brand me-1 me-sm-3" href="index.html">
-              <div class="d-flex align-items-center"><img class="me-2" src="{{ static_url }}/assets/img/icons/spot-illustrations/falcon.png" alt="" width="40"><span class="font-sans-serif text-primary">falcon</span>
+              <div class="d-flex align-items-center"><img class="me-2" src="assets/img/icons/spot-illustrations/falcon.png" alt="" width="40"><span class="font-sans-serif text-primary">falcon</span>
               </div>
             </a>
             <ul class="navbar-nav align-items-center d-none d-lg-block">
@@ -123,13 +241,13 @@
                         <div class="d-flex align-items-center"><span class="badge fw-medium text-decoration-none me-2 badge-subtle-success">events:</span>
                           <div class="flex-1 fs-10 title">Latest events in current month</div>
                         </div>
-                      </a><a class="dropdown-item px-x1 py-1 fs-9" href="app/e-commerce/product/product-grid.html">
+                      </a><a class="dropdown-item px-x1 py-1 fs-9" href="{{ static_url }}app/e-commerce/product/product-grid.html">
                         <div class="d-flex align-items-center"><span class="badge fw-medium text-decoration-none me-2 badge-subtle-info">products:</span>
                           <div class="flex-1 fs-10 title">Most popular products</div>
                         </div>
                       </a><hr class="text-200 dark__text-900"><h6 class="dropdown-header fw-medium text-uppercase px-x1 fs-11 pt-0 pb-2">Files</h6><a class="dropdown-item px-x1 py-2" href="#!">
                         <div class="d-flex align-items-center">
-                          <div class="file-thumbnail me-2"><img class="border h-100 w-100 object-fit-cover rounded-3" src="{{ static_url }}/assets/img/products/3-thumb.png" alt=""></div>
+                          <div class="file-thumbnail me-2"><img class="border h-100 w-100 object-fit-cover rounded-3" src="{{ static_url }}assets/img/products/3-thumb.png" alt=""></div>
                           <div class="flex-1">
                             <h6 class="mb-0 title">iPhone</h6>
                             <p class="fs-11 mb-0 d-flex"><span class="fw-semi-bold">Antony</span><span class="fw-medium text-600 ms-2">27 Sep at 10:30 AM</span></p>
@@ -137,7 +255,7 @@
                         </div>
                       </a><a class="dropdown-item px-x1 py-2" href="#!">
                         <div class="d-flex align-items-center">
-                          <div class="file-thumbnail me-2"><img class="img-fluid" src="{{ static_url }}/assets/img/icons/zip.png" alt=""></div>
+                          <div class="file-thumbnail me-2"><img class="img-fluid" src="{{ static_url }}assets/img/icons/zip.png" alt=""></div>
                           <div class="flex-1">
                             <h6 class="mb-0 title">Falcon v1.8.2</h6>
                             <p class="fs-11 mb-0 d-flex"><span class="fw-semi-bold">John</span><span class="fw-medium text-600 ms-2">30 Sep at 12:30 PM</span></p>
@@ -146,7 +264,7 @@
                       </a><hr class="text-200 dark__text-900"><h6 class="dropdown-header fw-medium text-uppercase px-x1 fs-11 pt-0 pb-2">Members</h6><a class="dropdown-item px-x1 py-2" href="pages/user/profile.html">
                         <div class="d-flex align-items-center">
                           <div class="avatar avatar-l status-online me-2">
-                            <img class="rounded-circle" src="{{ static_url }}/assets/img/team/1.jpg" alt="">
+                            <img class="rounded-circle" src="{{ static_url }}assets/img/team/1.jpg" alt="">
 
                           </div>
                           <div class="flex-1">
@@ -154,10 +272,10 @@
                             <p class="fs-11 mb-0 d-flex">Technext Limited</p>
                           </div>
                         </div>
-                      </a><a class="dropdown-item px-x1 py-2" href="pages/user/profile.html">
+                      </a><a class="dropdown-item px-x1 py-2" href="{{ static_url }}pages/user/profile.html">
                         <div class="d-flex align-items-center">
                           <div class="avatar avatar-l me-2">
-                            <img class="rounded-circle" src="{{ static_url }}/assets/img/team/2.jpg" alt="">
+                            <img class="rounded-circle" src="{{ static_url }}assets/img/team/2.jpg" alt="">
 
                           </div>
                           <div class="flex-1">
@@ -165,10 +283,10 @@
                             <p class="fs-11 mb-0 d-flex">Brain Trust</p>
                           </div>
                         </div>
-                      </a><a class="dropdown-item px-x1 py-2" href="pages/user/profile.html">
+                      </a><a class="dropdown-item px-x1 py-2" href="{{ static_url }}pages/user/profile.html">
                         <div class="d-flex align-items-center">
                           <div class="avatar avatar-l me-2">
-                            <img class="rounded-circle" src="{{ static_url }}/assets/img/team/3.jpg" alt="">
+                            <img class="rounded-circle" src="{{ static_url }}assets/img/team/3.jpg" alt="">
 
                           </div>
                           <div class="flex-1">
@@ -196,7 +314,10 @@
                   </div>
                 </div>
               </li>
+              <li class="nav-item d-none d-sm-block">
+                <a class="nav-link px-0 notification-indicator notification-indicator-warning notification-indicator-fill fa-icon-wait" href="app/e-commerce/shopping-cart.html"><svg class="svg-inline--fa fa-shopping-cart fa-w-18" data-fa-transform="shrink-7" style="font-size: 33px;transform-origin: 0.5625em 0.5em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="shopping-cart" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><g transform="translate(288 256)"><g transform="translate(0, 0)  scale(0.5625, 0.5625)  rotate(0 0 0)"><path fill="currentColor" d="M528.12 301.319l47.273-208C578.806 78.301 567.391 64 551.99 64H159.208l-9.166-44.81C147.758 8.021 137.93 0 126.529 0H24C10.745 0 0 10.745 0 24v16c0 13.255 10.745 24 24 24h69.883l70.248 343.435C147.325 417.1 136 435.222 136 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-15.674-6.447-29.835-16.824-40h209.647C430.447 426.165 424 440.326 424 456c0 30.928 25.072 56 56 56s56-25.072 56-56c0-22.172-12.888-41.332-31.579-50.405l5.517-24.276c3.413-15.018-8.002-29.319-23.403-29.319H218.117l-6.545-32h293.145c11.206 0 20.92-7.754 23.403-18.681z" transform="translate(-288 -256)"></path></g></g></svg><!-- <span class="fas fa-shopping-cart" data-fa-transform="shrink-7" style="font-size: 33px;"></span> Font Awesome fontawesome.com --><span class="notification-indicator-number">1</span></a>
 
+              </li>
               <li class="nav-item dropdown">
                 <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait" id="navbarDropdownNotification" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-hide-on-body-scroll="data-hide-on-body-scroll"><svg class="svg-inline--fa fa-bell fa-w-14" data-fa-transform="shrink-6" style="font-size: 33px;transform-origin: 0.4375em 0.5em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bell" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" data-fa-i2svg=""><g transform="translate(224 256)"><g transform="translate(0, 0)  scale(0.625, 0.625)  rotate(0 0 0)"><path fill="currentColor" d="M224 512c35.32 0 63.97-28.65 63.97-64H160.03c0 35.35 28.65 64 63.97 64zm215.39-149.71c-19.32-20.76-55.47-51.99-55.47-154.29 0-77.7-54.48-139.9-127.94-155.16V32c0-17.67-14.32-32-31.98-32s-31.98 14.33-31.98 32v20.84C118.56 68.1 64.08 130.3 64.08 208c0 102.3-36.15 133.53-55.47 154.29-6 6.45-8.66 14.16-8.61 21.71.11 16.4 12.98 32 32.1 32h383.8c19.12 0 32-15.6 32.1-32 .05-7.55-2.61-15.27-8.61-21.71z" transform="translate(-224 -256)"></path></g></g></svg><!-- <span class="fas fa-bell" data-fa-transform="shrink-6" style="font-size: 33px;"></span> Font Awesome fontawesome.com --></a>
                 <div class="dropdown-menu dropdown-caret dropdown-caret dropdown-menu-end dropdown-menu-card dropdown-menu-notification dropdown-caret-bg" aria-labelledby="navbarDropdownNotification">
@@ -216,7 +337,7 @@
                           <a class="notification notification-flush notification-unread" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="{{ static_url }}/assets/img/team/1-thumb.png" alt="">
+                                <img class="rounded-circle" src="{{ static_url }}assets/img/team/1-thumb.png" alt="">
 
                               </div>
                             </div>
@@ -248,7 +369,7 @@
                           <a class="notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-2xl me-3">
-                                <img class="rounded-circle" src="{{ static_url }}/assets/img/icons/weather-sm.jpg" alt="">
+                                <img class="rounded-circle" src="{{ static_url }}assets/img/icons/weather-sm.jpg" alt="">
 
                               </div>
                             </div>
@@ -264,7 +385,7 @@
                           <a class="border-bottom-0 notification-unread  notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="{{ static_url }}/assets/img/logos/oxford.png" alt="">
+                                <img class="rounded-circle" src="{{ static_url }}assets/img/logos/oxford.png" alt="">
 
                               </div>
                             </div>
@@ -280,7 +401,7 @@
                           <a class="border-bottom-0 notification notification-flush" href="#!">
                             <div class="notification-avatar">
                               <div class="avatar avatar-xl me-3">
-                                <img class="rounded-circle" src="{{ static_url }}/assets/img/team/10.jpg" alt="">
+                                <img class="rounded-circle" src="{{ static_url }}assets/img/team/10.jpg" alt="">
 
                               </div>
                             </div>
@@ -294,7 +415,7 @@
                         </div>
                       </div>
                     </div></div></div></div><div class="simplebar-placeholder" style="width: 0px; height: 0px;"></div></div><div class="simplebar-track simplebar-horizontal" style="visibility: hidden;"><div class="simplebar-scrollbar" style="width: 0px; display: none;"></div></div><div class="simplebar-track simplebar-vertical" style="visibility: hidden;"><div class="simplebar-scrollbar" style="height: 0px; display: none;"></div></div><div class="simplebar-track simplebar-horizontal"><div class="simplebar-scrollbar"></div></div><div class="simplebar-track simplebar-vertical"><div class="simplebar-scrollbar"></div></div><div class="simplebar-track simplebar-horizontal"><div class="simplebar-scrollbar"></div></div><div class="simplebar-track simplebar-vertical"><div class="simplebar-scrollbar"></div></div></div>
-                    <div class="card-footer text-center border-top"><a class="card-link d-block" href="app/social/notifications.html">View all</a></div>
+                    <div class="card-footer text-center border-top"><a class="card-link d-block" href="{{ static_url }}app/social/notifications.html">View all</a></div>
                   </div>
                 </div>
 
@@ -317,62 +438,62 @@
                     <div class="scrollbar-overlay nine-dots-dropdown" data-simplebar="init"><div class="simplebar-wrapper" style="margin: 0px;"><div class="simplebar-height-auto-observer-wrapper"><div class="simplebar-height-auto-observer"></div></div><div class="simplebar-mask"><div class="simplebar-offset" style="right: 0px; bottom: 0px;"><div class="simplebar-content-wrapper" tabindex="0" role="region" aria-label="scrollable content" style="height: auto; overflow: hidden;"><div class="simplebar-content" style="padding: 0px;">
                       <div class="card-body px-3">
                         <div class="row text-center gx-0 gy-0">
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="pages/user/profile.html" target="_blank">
-                              <div class="avatar avatar-2xl"> <img class="rounded-circle" src="{{ static_url }}/assets/img/team/3.jpg" alt=""></div>
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="{{ static_url }}pages/user/profile.html" target="_blank">
+                              <div class="avatar avatar-2xl"> <img class="rounded-circle" src="{{ static_url }}assets/img/team/3.jpg" alt=""></div>
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11">Account</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="https://themewagon.com/" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/themewagon.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="https://themewagon.com/" target="_blank"><img class="rounded" src="assets/img/nav-icons/themewagon.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Themewagon</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="https://mailbluster.com/" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/mailbluster.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="https://mailbluster.com/" target="_blank"><img class="rounded" src="assets/img/nav-icons/mailbluster.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Mailbluster</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/google.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/google.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Google</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/spotify.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/spotify.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Spotify</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/steam.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/steam.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Steam</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/github-light.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/github-light.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Github</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/discord.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/discord.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Discord</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/xbox.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/xbox.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">xbox</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/trello.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/trello.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Kanban</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/hp.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/hp.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Hp</p>
                             </a></div>
                           <div class="col-12">
                             <hr class="my-3 mx-n3 bg-200">
                           </div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/linkedin.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/linkedin.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Linkedin</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/twitter.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/twitter.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Twitter</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/facebook.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/facebook.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Facebook</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/instagram.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/instagram.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Instagram</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/pinterest.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/pinterest.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Pinterest</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/slack.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/slack.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Slack</p>
                             </a></div>
-                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="{{ static_url }}/assets/img/nav-icons/deviantart.png" alt="" width="40" height="40">
+                          <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="#!" target="_blank"><img class="rounded" src="assets/img/nav-icons/deviantart.png" alt="" width="40" height="40">
                               <p class="mb-0 fw-medium text-800 text-truncate fs-11 pt-1">Deviantart</p>
                             </a></div>
                           <div class="col-4"><a class="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none" href="app/events/event-detail.html" target="_blank">
@@ -391,7 +512,7 @@
               </li>
               <li class="nav-item dropdown"><a class="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <div class="avatar avatar-xl">
-                    <img class="rounded-circle" src="{{ static_url }}/assets/img/team/3-thumb.png" alt="">
+                    <img class="rounded-circle" src="assets/img/team/3-thumb.png" alt="">
 
                   </div>
                 </a>
@@ -413,21 +534,19 @@
             </ul>
           </nav>
 
-          <div class="row g-3 mb-3">
-          
           <div class="col-xxl-6 col-lg-12">
             <div class="card h-100">
-              <div class="bg-holder bg-card" style="background-image:url({{ static_url }}/assets/img/icons/spot-illustrations/corner-3.png);">
+              <div class="bg-holder bg-card" style="background-image:url(assets/img/icons/spot-illustrations/corner-3.png);">
               </div>
               <!--/.bg-holder-->
-          
+
               <div class="card-header z-1">
                 <h5 class="text-primary">Добро пожаловать в проект Распознавание Речи</h5>
                 <h6 class="text-600">Данный проект помогает анализировать разговоры и собирать статистику по работе менеджеров сервиса</h6>
               </div>
               <div class="card-body z-1">
                 <div class="row g-2 h-100 align-items-end">
-          
+
                   <!-- Раздел: Начать запись -->
                   <div class="col-sm-6 col-md-5">
                     <div class="d-flex position-relative">
@@ -435,14 +554,14 @@
                         <span class="fas fa-microphone text-primary"></span>
                       </div>
                       <div class="flex-1">
-                        <a class="stretched-link text-800" href="#">
+                        <a class="stretched-link text-800" href="#!">
                           <h6 class="mb-0">Начать запись</h6>
                         </a>
                         <p class="mb-0 fs-11 text-500">Распознавание речи в реальном времени</p>
                       </div>
                     </div>
                   </div>
-          
+
                   <!-- Раздел: Остановить запись -->
                   <div class="col-sm-6 col-md-5">
                     <div class="d-flex position-relative">
@@ -450,14 +569,14 @@
                         <span class="fas fa-stop-circle text-danger"></span>
                       </div>
                       <div class="flex-1">
-                        <a class="stretched-link text-800" href="#">
+                        <a class="stretched-link text-800" href="#!">
                           <h6 class="mb-0">Остановить запись</h6>
                         </a>
                         <p class="mb-0 fs-11 text-500">Завершение процесса распознавания речи</p>
                       </div>
                     </div>
                   </div>
-          
+
                   <!-- Раздел: Саммари текста -->
                   <div class="col-sm-6 col-md-5">
                     <div class="d-flex position-relative">
@@ -465,14 +584,14 @@
                         <span class="fas fa-file-alt text-success"></span>
                       </div>
                       <div class="flex-1">
-                        <a class="stretched-link text-800" href="#">
+                        <a class="stretched-link text-800" href="#!">
                           <h6 class="mb-0">Саммари текста</h6>
                         </a>
                         <p class="mb-0 fs-11 text-500">Краткий анализ речи клиента</p>
                       </div>
                     </div>
                   </div>
-          
+
                   <!-- Раздел: Анализ эмоций -->
                   <div class="col-sm-6 col-md-5">
                     <div class="d-flex position-relative">
@@ -480,14 +599,29 @@
                         <span class="fas fa-smile text-warning"></span>
                       </div>
                       <div class="flex-1">
-                        <a class="stretched-link text-800" href="#">
+                        <a class="stretched-link text-800" href="#!">
                           <h6 class="mb-0">Анализ эмоций</h6>
                         </a>
                         <p class="mb-0 fs-11 text-500">Обработка эмоциональной окраски речи</p>
                       </div>
                     </div>
                   </div>
-          
+
+                  <!-- Раздел: История записей -->
+                  <div class="col-sm-6 col-md-5">
+                    <div class="d-flex position-relative">
+                      <div class="icon-item icon-item-sm border rounded-3 shadow-none me-2">
+                        <span class="fas fa-history text-info"></span>
+                      </div>
+                      <div class="flex-1">
+                        <a class="stretched-link text-800" href="#!">
+                          <h6 class="mb-0">История записей</h6>
+                        </a>
+                        <p class="mb-0 fs-11 text-500">Просмотр предыдущих данных и статистики</p>
+                      </div>
+                    </div>
+                  </div>
+
                   <!-- Раздел: Отображение текста записи -->
                   <div class="col-12">
                     <div class="card">
@@ -495,195 +629,15 @@
                         <h6 class="text-primary">Текст записи</h6>
                       </div>
                       <div class="card-body">
-                        <p class="text-500 mb-0" id="recognized-text1">Здесь будет отображаться текст распознанной записи. Начните запись, чтобы увидеть результат.</p>
+                        <p class="text-500 mb-0">Здесь будет отображаться текст распознанной записи. Начните запись, чтобы увидеть результат.</p>
                       </div>
                     </div>
                   </div>
-          
+
                 </div>
               </div>
             </div>
           </div>
-          
-          <div class="col-xxl-6 col-md-12">
-            <div class="card h-100">
-              <div class="bg-holder bg-card" style="background-image:url({{ static_url }}/assets/img/icons/spot-illustrations/corner-3.png);">
-              </div>
-              <!--/.bg-holder-->
-          
-              <div class="card-header">
-                <h5 class="text-primary">Общая тональность</h5>
-              </div>
-              <div class="card-body" style="padding: 20px; font-size: 18px; line-height: 1.5;">
-                <p class="fs-10 text-800" id="emotions-output" style="font-size: 18px; padding: 10px;  border-radius: 5px;">
-                  Здесь будет отображаться результат анализа эмоций.
-                </p>
-              </div>
-
-              
-              
-
-              
-              </div>
-            </div>
-          
-            
-          </div>
-          
-          
-          <div class="row g-3 mb-3">
-            <div class="col-sm-9">
-              <div class="card overflow-hidden" style="min-width: 12rem">
-                <div class="bg-holder bg-card" style="background-image:url({{ static_url }}/assets/img/icons/spot-illustrations/corner-2.png);">
-                </div>
-                <!--/.bg-holder-->
-
-                <div class="card-body position-relative">
-                  <h6>Саммари текста</h6>
-
-                  <div class="card-body" style="padding: 20px; font-size: 14px; line-height: 1.5;">
-                    <p class="fs-10 text-800" id="summary-output" style="font-size: 16px; padding: 10px;  border-radius: 5px;">
-                      Здесь будет отображаться краткое саммари переговоров.
-                    </p>
-                  </div>
-
-                </div>
-                
-              </div>
-            </div>
-            <div class="col-sm-3">
-              <div class="card overflow-hidden" style="min-width: 12rem">
-                <div class="bg-holder bg-card" style="background-image:url({{ static_url }}/assets/img/icons/spot-illustrations/corner-1.png);">
-                </div>
-                <!--/.bg-holder-->
-
-                <div class="card-body position-relative">
-                  <h6>Кастомизация Отчета</h6>
-
-                  <div class="card-body" style="padding: 20px; font-size: 14px; line-height: 1.5;">
-                    <textarea id="customization-input" style="width: 100%; height: 100px; font-size: 14px; padding: 10px; border: 1px solid #ccc; border-radius: 5px;" placeholder="Введите команду для кастомизации отчета саммари"></textarea>
-                  </div>
-
-                </div>
-                
-              </div>
-            </div>
-          </div>
-
-          
-          <script>
-          // Инициализация Web Speech API
-          var recognition = new webkitSpeechRecognition();
-          recognition.lang = 'ru-RU';
-          recognition.continuous = true;
-          recognition.interimResults = true;
-          
-          // Переменные для накопленного текста и интервала отправки
-          var accumulatedText = '';
-          var sendInterval;
-          
-          // Обработчик кнопки "Начать запись"
-          document.querySelector('.fa-microphone').closest('.d-flex').onclick = function () {
-              recognition.start();
-              sendInterval = setInterval(() => {
-                  sendDataToServer(accumulatedText);
-              }, 1000); // Отправлять данные каждые 5 секунд
-              document.querySelector('#recognized-text1').textContent = 'Идет запись...';
-          };
-          
-          // Обработчик кнопки "Остановить запись"
-          document.querySelector('.fa-stop-circle').closest('.d-flex').onclick = function () {
-              recognition.stop();
-              clearInterval(sendInterval);
-              //document.querySelector('#recognized-text1').textContent = 'Запись остановлена.';
-          };
-          
-          // Обработчик кнопки "Саммари текста"
-          document.querySelector('.fa-file-alt').closest('.d-flex').onclick = function () {
-              fetch("/api/summarize", {
-                  method: "POST",
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ text: accumulatedText , command: document.querySelector('#customization-input').value})
-              })
-                  .then(response => response.json())
-                  .then(data => {
-                      displaySummaryResults(data);
-                  })
-                  .catch(error => console.error('Error:', error));
-          };
-          
-          // Обработчик кнопки "Анализ эмоций"
-          document.querySelector('.fa-smile').closest('.d-flex').onclick = function () {
-              fetch("/api/analyse-log", {
-                  method: "POST",
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ text: accumulatedText})
-              })
-                  .then(response => response.json())
-                  .then(data => {
-                      //displayAnalysisResults(data);
-                      displayEnalysisResults(data);
-                  })
-                  .catch(error => console.error('Error:', error));
-          };
-          
-          // Обработка результатов распознавания
-          recognition.onresult = function (event) {
-              var interimTranscript = '';
-              for (var i = event.resultIndex; i < event.results.length; ++i) {
-                  if (event.results[i].isFinal) {
-                      accumulatedText += event.results[i][0].transcript;
-                  } else {
-                      interimTranscript += event.results[i][0].transcript;
-                  }
-              }
-              document.querySelector('#recognized-text1').innerHTML = accumulatedText + '<i>' + interimTranscript + '</i>';
-          };
-          
-          // Функция отправки данных на сервер
-          function sendDataToServer(text) {
-              fetch("/api/upload-audio", {
-                  method: "POST",
-                  headers: {
-                      'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({ text: text })
-              })
-                  .then(response => response.json())
-                  .catch(error => console.error('Error sending data:', error));
-          }
-          
-
-          function displayEnalysisResults(data) {
-              var resultDiv = document.querySelector('#emotions-output');
-              resultDiv.innerHTML = ''; // Очищаем текущий текст
-              //resultDiv.innerHTML += '<h2>Эмоции:</h2>';
-              Object.keys(data.sentiment_score).forEach(key => {
-                  resultDiv.innerHTML += `<p>${key}: ${data.sentiment_score[key]}</p>`;
-              });
-          }
-
-          // Отображение результатов саммари
-          function displaySummaryResults(data) {
-              var summaryOutput = document.querySelector('#summary-output');
-              var formattedData = data
-                .replace(/\*\*(.*?)\*\*/g, ' <strong>$1</strong>') // Добавляет пробел перед жирными словами
-                .replace(/(\s+)<strong>/g, '&nbsp;<strong>'); // Заменяет начальный пробел на неразрывный пробел для форматирования
-              summaryOutput.innerHTML = `<h2>Саммари текста:</h2><p>${formattedData}</p>`;
-          }
-
-
-          
-          </script>
-
-  
-            </div>
-          </div>
-        </div>
 
           <footer class="footer">
             <div class="row g-0 justify-content-between fs-10 mt-4 mb-3">
@@ -847,21 +801,21 @@
           <div class="row gx-2">
             <div class="col-4">
               <input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="theme" checked="true">
-              <label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherLight"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{ static_url }}/assets/img/generic/falcon-mode-default.jpg" alt=""></span><span class="label-text">Light</span></label>
+              <label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherLight"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/falcon-mode-default.jpg" alt=""></span><span class="label-text">Light</span></label>
             </div>
             <div class="col-4">
               <input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="theme">
-              <label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherDark"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{ static_url }}/assets/img/generic/falcon-mode-dark.jpg" alt=""></span><span class="label-text"> Dark</span></label>
+              <label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherDark"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/falcon-mode-dark.jpg" alt=""></span><span class="label-text"> Dark</span></label>
             </div>
             <div class="col-4">
               <input class="btn-check" id="themeSwitcherAuto" name="theme-color" type="radio" value="auto" data-theme-control="theme">
-              <label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherAuto"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="{{ static_url }}/assets/img/generic/falcon-mode-auto.jpg" alt=""></span><span class="label-text"> Auto</span></label>
+              <label class="btn d-inline-block btn-navbar-style fs-10" for="themeSwitcherAuto"> <span class="hover-overlay mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/falcon-mode-auto.jpg" alt=""></span><span class="label-text"> Auto</span></label>
             </div>
           </div>
         </div>
         <hr>
         <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-start"><img class="me-2" src="{{ static_url }}/assets/img/icons/left-arrow-from-left.svg" width="20" alt="">
+          <div class="d-flex align-items-start"><img class="me-2" src="assets/img/icons/left-arrow-from-left.svg" width="20" alt="">
             <div class="flex-1">
               <h5 class="fs-9">RTL Mode</h5>
               <p class="fs-10 mb-0">Switch your language direction </p><a class="fs-10" href="documentation/customization/configuration.html">RTL Documentation</a>
@@ -873,7 +827,7 @@
         </div>
         <hr>
         <div class="d-flex justify-content-between">
-          <div class="d-flex align-items-start"><img class="me-2" src="{{ static_url }}/assets/img/icons/arrows-h.svg" width="20" alt="">
+          <div class="d-flex align-items-start"><img class="me-2" src="assets/img/icons/arrows-h.svg" width="20" alt="">
             <div class="flex-1">
               <h5 class="fs-9">Fluid Layout</h5>
               <p class="fs-10 mb-0">Toggle container layout system </p><a class="fs-10" href="documentation/customization/configuration.html">Fluid Documentation</a>
@@ -884,7 +838,7 @@
           </div>
         </div>
         <hr>
-        <div class="d-flex align-items-start"><img class="me-2" src="{{ static_url }}/assets/img/icons/paragraph.svg" width="20" alt="">
+        <div class="d-flex align-items-start"><img class="me-2" src="assets/img/icons/paragraph.svg" width="20" alt="">
           <div class="flex-1">
             <h5 class="fs-9 d-flex align-items-center">Navigation Position</h5>
             <p class="fs-10 mb-2">Select a suitable navigation system for your web application </p>
@@ -906,23 +860,23 @@
           <div class="row gx-2">
             <div class="col-6">
               <input class="btn-check" id="navbar-style-transparent" type="radio" name="navbarStyle" value="transparent" data-theme-control="navbarStyle" checked="true">
-              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-transparent"> <img class="img-fluid img-prototype" src="{{ static_url }}/assets/img/generic/default.png" alt=""><span class="label-text"> Transparent</span></label>
+              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-transparent"> <img class="img-fluid img-prototype" src="assets/img/generic/default.png" alt=""><span class="label-text"> Transparent</span></label>
             </div>
             <div class="col-6">
               <input class="btn-check" id="navbar-style-inverted" type="radio" name="navbarStyle" value="inverted" data-theme-control="navbarStyle">
-              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-inverted"> <img class="img-fluid img-prototype" src="{{ static_url }}/assets/img/generic/inverted.png" alt=""><span class="label-text"> Inverted</span></label>
+              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-inverted"> <img class="img-fluid img-prototype" src="assets/img/generic/inverted.png" alt=""><span class="label-text"> Inverted</span></label>
             </div>
             <div class="col-6">
               <input class="btn-check" id="navbar-style-card" type="radio" name="navbarStyle" value="card" data-theme-control="navbarStyle">
-              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-card"> <img class="img-fluid img-prototype" src="{{ static_url }}/assets/img/generic/card.png" alt=""><span class="label-text"> Card</span></label>
+              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-card"> <img class="img-fluid img-prototype" src="assets/img/generic/card.png" alt=""><span class="label-text"> Card</span></label>
             </div>
             <div class="col-6">
               <input class="btn-check" id="navbar-style-vibrant" type="radio" name="navbarStyle" value="vibrant" data-theme-control="navbarStyle">
-              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-vibrant"> <img class="img-fluid img-prototype" src="{{ static_url }}/assets/img/generic/vibrant.png" alt=""><span class="label-text"> Vibrant</span></label>
+              <label class="btn d-block w-100 btn-navbar-style fs-10" for="navbar-style-vibrant"> <img class="img-fluid img-prototype" src="assets/img/generic/vibrant.png" alt=""><span class="label-text"> Vibrant</span></label>
             </div>
           </div>
         </div>
-        <div class="text-center mt-5"><img class="mb-4" src="{{ static_url }}/assets/img/icons/spot-illustrations/47.png" alt="" width="120">
+        <div class="text-center mt-5"><img class="mb-4" src="assets/img/icons/spot-illustrations/47.png" alt="" width="120">
           <h5>Like What You See?</h5>
           <p class="fs-10">Get Falcon now and create beautiful dashboards with hundreds of widgets.</p><a class="mb-3 btn btn-primary" href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template/" target="_blank">Purchase</a>
         </div>
