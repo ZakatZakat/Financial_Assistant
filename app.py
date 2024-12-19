@@ -18,6 +18,7 @@ def index():
 @app.route('/api/upload-audio', methods=['POST'])
 def upload_audio():
     data = request.get_json()
+    print(data)
     text = data['text']
     log_file_path = os.path.join('saved_log', 'log.txt')
     with open(log_file_path, 'a') as log_file:
@@ -27,23 +28,21 @@ def upload_audio():
 
 @app.route('/api/analyse-log', methods=['POST'])
 def analyse_log():
-    result, label_mapping = preprocess()
-    translated_text = translation_pipeline_rus_eng(result)
-    sentiment_score = sentiment_metrics(translated_text)
-    emotions_scores = emotion_pipeline(translated_text, label_mapping)
+    result = preprocess()
+    emotion_scores = emotion_pipeline(result)
 
     response = {
-        'sentiment_score': sentiment_score,
-        'emotions_scores': emotions_scores
+        #'sentiment_score': sentiment_score,
+        'emotions_scores': emotion_scores
     }
 
     return jsonify(response)
 
 @app.route('/api/summarize', methods=['POST'])
 def summarizate_log():
-    result, _ = preprocess()
-    translated_text_eng_rus = translation_pipeline_rus_eng(result)
-    summarized_text = summarization_pipeline(translated_text_eng_rus)
+    result = preprocess()
+    #translated_text_eng_rus = translation_pipeline_rus_eng(result)
+    summarized_text = summarization_pipeline(result)
     #translated_text_rus_eng = translation_pipeline_eng_rus(summarized_text)
     return jsonify(summarized_text)
 

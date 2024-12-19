@@ -51,7 +51,7 @@ def preprocess():
             print("File is empty.")
 
         file.close()
-    return last_row, label_mapping
+    return last_row#, label_mapping
 
 def sentiment_tempreture(text):
     sentiment_pipeline = pipeline("sentiment-analysis", model='ProsusAI/finbert')
@@ -69,21 +69,55 @@ def translation_pipeline_eng_rus(text):
     translated_text = translation_pipeline(text)[0]['translation_text']
     return translated_text
 
-def emotion_pipeline(text, label_mapping):
-    # Create a pipeline for text classification
-    classification_pipeline = pipeline("text-classification", model="joeddav/distilbert-base-uncased-go-emotions-student")
+def emotion_pipeline(text):
+    #translated_text = translation_pipeline_rus_eng(result)
+    #sentiment_score = sentiment_metrics(translated_text)
+    #emotions_scores = emotion_pipeline(translated_text, label_mapping)
+    message_content = f'''Определи тональность данного текста и распредели его согласно этим эмоциональным коэффициентам
+    1.	Радость (joy)
+	2.	Грусть (sadness)
+	3.	Гнев (anger)
+	4.	Страх (fear)
+	5.	Удивление (surprise)
+    
+    Выведи и подбери коэффициента сам, чтобы сумма их была 100%, а они распределялись на основе твоего анализа
+    Пример: 
+    
+    Данный текст в целом имеет позитивный настрой, хотя присутствуют и упоминания о проблемах. Проанализировав текст, можно выделить следующие эмоциональные коэффициенты:
+	1.	Радость (joy) – 50%
+	2.	Грусть (sadness) – 10%
+	3.	Гнев (anger) – 0%
+	4.	Страх (fear) – 5%
+	5.	Удивление (surprise) – 5%
 
-    # Perform text classification
-    results = classification_pipeline(text, top_k=5)
-
-    # Create a dictionary to store the results in the desired format
-    formatted_results = {label_mapping.get(result['label'], result['label']): result['score'] for result in results}
-
-    # Convert the dictionary to JSON and print the output
-    return formatted_results
+    Остальные 30% остаются неопределёнными, так как в тексте нет явных признаков других эмоций. Таким образом, итоговое распределение будет следующим:
+	•	Радость: 50%
+	•	Грусть: 10%
+	•	Гнев: 0%
+	•	Страх: 5%
+	•	Удивление: 5%
+    Сделай текст читабельным, делай отступы, не используй ** ** символы
+    : {text}.
+    '''
+        
+        # Отправка запроса к API
+    chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": message_content
+                }
+            ],
+            model="gpt-4o-mini",
+        )
+        
+        # Вывод и сохранение результата
+    result_content = chat_completion.choices[0].message.content
+    
+    return result_content
 
 def summarization_pipeline(text):
-    message_content = f'''Для полученного текста {text} сформулируй отчет и распиши, о чем был данный переговор менеджера и клиента
+    message_content = f'''Представь что ты клиентский мененджер в банке. Сделай подробную суммаризацию следующего текста с учетом этого: {text}.
     '''
         
         # Отправка запроса к API
