@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Recorder</title>
+</head>
+<body>
+    <h1>Audio Recorder</h1>
+    <button id="startButton">Start Recording</button>
+    <button id="stopButton" disabled>Stop Recording</button>
+
+    <script>
+        const startButton = document.getElementById('startButton');
+        const stopButton = document.getElementById('stopButton');
+
+        let mediaRecorder;
+        let audioChunks = [];
+
+        startButton.addEventListener('click', async () => {
+            // Request microphone access
+            const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+
+            // Initialize MediaRecorder
+            mediaRecorder = new MediaRecorder(stream);
+
+            mediaRecorder.ondataavailable = event => {
+                audioChunks.push(event.data);
+            };
+
+            mediaRecorder.onstop = async () => {
+                // Combine audio chunks into a single Blob
+                const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                audioChunks = []; // Clear the chunks for the next recording
+
+                // Upload the audio file to the server
+                const formData = new FormData();
+                formData.append('audio', audioBlob, 'recording.wav');
+
+                await fetch('/upload-audio', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                alert('Audio saved successfully!');
+            };
+
+            mediaRecorder.start();
+            startButton.disabled = true;
+            stopButton.disabled = false;
+        });
+
+        stopButton.addEventListener('click', () => {
+            mediaRecorder.stop();
+            startButton.disabled = false;
+            stopButton.disabled = true;
+        });
+    </script>
+</body>
+</html>

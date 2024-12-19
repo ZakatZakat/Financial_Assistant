@@ -1,38 +1,18 @@
 from transformers import pipeline
-import json
+import os
+from openai import OpenAI
+import pprint
+from dotenv import load_dotenv
+
+load_dotenv()
+
+client = OpenAI(
+    # This is the default and can be omitted
+    api_key=os.getenv("OPENAI_API_KEY"),
+)
+
 
 def preprocess():
-    label_mapping = {
-        "admiration": "восхищение",
-        "amusement": "развлечение",
-        "anger": "гнево",
-        "bother": "нудьга",
-        "approval": "одобрение",
-        "caring": "забота",
-        "confusion": "замешательство",
-        "curiosity": "интерес",
-        "desire": "притязание",
-        "disapproval": "негативное отношение",
-        "disappointment": "разочарование",
-        "disgust": "отвратение",
-        "embarrassment": "смущение",
-        "excitement": "восторг",
-        "fear": "страх",
-        "gratitude": "благодарность",
-        "grief": "горе",
-        "joy": "радость",
-        "love": "любовь",
-        "nervousness": "нервозность",
-        "optimism": "оптимизм",
-        "pride": "гордость",
-        "realization": "осознание",
-        "relief": "облегчение",
-        "remorse": "признак",
-        "sadness": "грусть",
-        "surprise": "удивление",
-        "neutral": "нейтралитет"
-    }
-
     with open('saved_log/log.txt', 'r') as file:
         rows = file.readlines()
         last_row = rows[-1].strip() if rows else None
@@ -40,7 +20,7 @@ def preprocess():
             print("File is empty.")
 
         file.close()
-    return last_row, label_mapping
+    return last_row
 
 def sentiment_tempreture(text):
     sentiment_pipeline = pipeline("sentiment-analysis", model='ProsusAI/finbert')
@@ -58,25 +38,72 @@ def translation_pipeline_eng_rus(text):
     translated_text = translation_pipeline(text)[0]['translation_text']
     return translated_text
 
-def emotion_pipeline(text, label_mapping):
+from transformers import pipeline
+
+def emotions_pipeline(text, label_mapping):
     # Create a pipeline for text classification
     classification_pipeline = pipeline("text-classification", model="joeddav/distilbert-base-uncased-go-emotions-student")
 
     # Perform text classification
-    results = classification_pipeline(text, top_k=5)
+    results = classification_pipeline(text, top_k=100)
 
-    # Create a dictionary to store the results in the desired format
-    formatted_results = {label_mapping.get(result['label'], result['label']): result['score'] for result in results}
+    # Filter results for specific keys
+    filtered_labels = ["joy", "sadness", "anger", "fear", "surprise"]
+    filtered_results = {
+        label_mapping.get(result['label'], result['label']): result['score']
+        for result in results
+        if result['label'] in filtered_labels
+    }
 
-    # Convert the dictionary to JSON and print the output
-    return formatted_results
+    # Add percentage symbol to the values
+    final_results = {key: f"{round(value * 100, 2)}%" for key, value in filtered_results.items()}
 
-def summarization_pipeline(text):
-    # Создание объекта pipeline для суммаризации
-    summarizer = pipeline("summarization", model="slauw87/bart_summarisation")
+    # Return filtered results with percentages
+    return final_results
 
-    # Выполнение суммаризации
-    summary = summarizer(text, max_length=150, min_length=40, length_penalty=2.0, num_beams=4, early_stopping=True)
+
+def emotion_pipeline(text):
+    #translated_text = translation_pipeline_rus_eng(result)
+    #sentiment_score = sentiment_metrics(translated_text)
+    #emotions_scores = emotion_pipeline(translated_text, label_mapping)
+    message_content = f'''Сделай небольшой анализ тональности текста и выведи результат. Без цифр или процентов
+    Сделай текст в виде списка, делай отступы, не используй ** ** символы
+    : {text}.
+    '''
+        
+        # Отправка запроса к API
+    chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": message_content
+                }
+            ],
+            model="gpt-4o-mini",
+        )
+        
+        # Вывод и сохранение результата
+    result_content = chat_completion.choices[0].message.content
     
-    # Возвращение суммаризированного текста
-    return summary[0]['summary_text']
+    return result_content
+
+def summarization_pipeline(text, command=None):
+    message_content = f'''Представь что ты клиентский мененджер в банке. Сделай краткую суммаризацию следующего текста с учетом этого: {text}.
+    Дополнительно {command}
+    '''
+        
+        # Отправка запроса к API
+    chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "user",
+                    "content": message_content
+                }
+            ],
+            model="gpt-4o-mini",
+        )
+        
+        # Вывод и сохранение результата
+    result_content = chat_completion.choices[0].message.content
+    
+    return result_content
