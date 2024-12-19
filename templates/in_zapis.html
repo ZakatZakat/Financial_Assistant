@@ -488,21 +488,6 @@
                     </div>
                   </div>
           
-                  <!-- Раздел: История записей -->
-                  <div class="col-sm-6 col-md-5">
-                    <div class="d-flex position-relative">
-                      <div class="icon-item icon-item-sm border rounded-3 shadow-none me-2">
-                        <span class="fas fa-history text-info"></span>
-                      </div>
-                      <div class="flex-1">
-                        <a class="stretched-link text-800" href="#">
-                          <h6 class="mb-0">История записей</h6>
-                        </a>
-                        <p class="mb-0 fs-11 text-500">Просмотр предыдущих данных и статистики</p>
-                      </div>
-                    </div>
-                  </div>
-          
                   <!-- Раздел: Отображение текста записи -->
                   <div class="col-12">
                     <div class="card">
@@ -527,12 +512,18 @@
               <!--/.bg-holder-->
           
               <div class="card-header">
-                <h5 class="text-primary">Эмоциональные параметры</h5>
+                <h5 class="text-primary">Общая тональность</h5>
               </div>
-              <div class="card-body" style="padding: 20px; font-size: 14px; line-height: 1.5;">
-                <p class="fs-10 text-800" id="emotions-output" style="font-size: 16px; padding: 10px; background-color: #f8f9fa; border-radius: 5px;">
+              <div class="card-body" style="padding: 20px; font-size: 18px; line-height: 1.5;">
+                <p class="fs-10 text-800" id="emotions-output" style="font-size: 18px; padding: 10px;  border-radius: 5px;">
                   Здесь будет отображаться результат анализа эмоций.
                 </p>
+                <p class="fs-10 text-800" id="emotions-output1" style="font-size: 16px; padding: 10px; border-radius: 5px;">
+                </p>
+              </div>
+              
+
+              
               </div>
             </div>
           </div>
@@ -585,7 +576,7 @@
           document.querySelector('.fa-stop-circle').closest('.d-flex').onclick = function () {
               recognition.stop();
               clearInterval(sendInterval);
-              //document.querySelector('#recognized-text1').textContent = 'Запись остановлена.';
+              document.querySelector('#recognized-text1').textContent = 'Запись остановлена.';
           };
           
           // Обработчик кнопки "Саммари текста"
@@ -616,6 +607,7 @@
                   .then(response => response.json())
                   .then(data => {
                       displayAnalysisResults(data);
+                      displayEnalysisResults(data);
                   })
                   .catch(error => console.error('Error:', error));
           };
@@ -651,12 +643,17 @@
               var resultDiv = document.querySelector('#emotions-output');
               resultDiv.innerHTML = ''; // Очищаем текущий текст
               resultDiv.innerHTML += `<p>${data.emotions_scores}</p>`;
-              
-              //resultDiv.innerHTML += '<h2>Эмоции:</h2>';
-              //Object.keys(data.emotions_scores).forEach(key => {
-              //    resultDiv.innerHTML += `<p>${key}: ${data.emotions_scores[key]}</p>`;
-              //});
           }
+
+          function displayEnalysisResults(data) {
+              var resultDiv = document.querySelector('#emotions-output1');
+              resultDiv.innerHTML = ''; // Очищаем текущий текст
+              //resultDiv.innerHTML += '<h2>Эмоции:</h2>';
+              Object.keys(data.sentiment_score).forEach(key => {
+                  resultDiv.innerHTML += `<p>${key}: ${data.sentiment_score[key]}</p>`;
+              });
+          }
+
           
           // Отображение результатов саммари
           function displaySummaryResults(data) {
@@ -948,6 +945,8 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
     <script src="{{ static_url }}/vendors/list.js/list.min.js"></script>
     <script src="{{ static_url }}/assets/js/theme.js"></script>
+
+  
 
 
 </body>

@@ -13,37 +13,6 @@ client = OpenAI(
 
 
 def preprocess():
-    label_mapping = {
-        "admiration": "восхищение",
-        "amusement": "развлечение",
-        "anger": "гнево",
-        "bother": "нудьга",
-        "approval": "одобрение",
-        "caring": "забота",
-        "confusion": "замешательство",
-        "curiosity": "интерес",
-        "desire": "притязание",
-        "disapproval": "негативное отношение",
-        "disappointment": "разочарование",
-        "disgust": "отвратение",
-        "embarrassment": "смущение",
-        "excitement": "восторг",
-        "fear": "страх",
-        "gratitude": "благодарность",
-        "grief": "горе",
-        "joy": "радость",
-        "love": "любовь",
-        "nervousness": "нервозность",
-        "optimism": "оптимизм",
-        "pride": "гордость",
-        "realization": "осознание",
-        "relief": "облегчение",
-        "remorse": "признак",
-        "sadness": "грусть",
-        "surprise": "удивление",
-        "neutral": "нейтралитет"
-    }
-
     with open('saved_log/log.txt', 'r') as file:
         rows = file.readlines()
         last_row = rows[-1].strip() if rows else None
@@ -51,7 +20,7 @@ def preprocess():
             print("File is empty.")
 
         file.close()
-    return last_row#, label_mapping
+    return last_row
 
 def sentiment_tempreture(text):
     sentiment_pipeline = pipeline("sentiment-analysis", model='ProsusAI/finbert')
@@ -69,34 +38,25 @@ def translation_pipeline_eng_rus(text):
     translated_text = translation_pipeline(text)[0]['translation_text']
     return translated_text
 
+def emotions_pipeline(text, label_mapping):
+    # Create a pipeline for text classification
+    classification_pipeline = pipeline("text-classification", model="joeddav/distilbert-base-uncased-go-emotions-student")
+
+    # Perform text classification
+    results = classification_pipeline(text, top_k=5)
+
+    # Create a dictionary to store the results in the desired format
+    formatted_results = {label_mapping.get(result['label'], result['label']): result['score'] for result in results}
+
+    # Convert the dictionary to JSON and print the output
+    return formatted_results
+
 def emotion_pipeline(text):
     #translated_text = translation_pipeline_rus_eng(result)
     #sentiment_score = sentiment_metrics(translated_text)
     #emotions_scores = emotion_pipeline(translated_text, label_mapping)
-    message_content = f'''Определи тональность данного текста и распредели его согласно этим эмоциональным коэффициентам
-    1.	Радость (joy)
-	2.	Грусть (sadness)
-	3.	Гнев (anger)
-	4.	Страх (fear)
-	5.	Удивление (surprise)
-    
-    Выведи и подбери коэффициента сам, чтобы сумма их была 100%, а они распределялись на основе твоего анализа
-    Пример: 
-    
-    Данный текст в целом имеет позитивный настрой, хотя присутствуют и упоминания о проблемах. Проанализировав текст, можно выделить следующие эмоциональные коэффициенты:
-	1.	Радость (joy) – 50%
-	2.	Грусть (sadness) – 10%
-	3.	Гнев (anger) – 0%
-	4.	Страх (fear) – 5%
-	5.	Удивление (surprise) – 5%
-
-    Остальные 30% остаются неопределёнными, так как в тексте нет явных признаков других эмоций. Таким образом, итоговое распределение будет следующим:
-	•	Радость: 50%
-	•	Грусть: 10%
-	•	Гнев: 0%
-	•	Страх: 5%
-	•	Удивление: 5%
-    Сделай текст читабельным, делай отступы, не используй ** ** символы
+    message_content = f'''Сделай небольшой анализ тональности текста и выведи результат. Без цифр или процентов
+    Сделай текст в виде списка, делай отступы, не используй ** ** символы
     : {text}.
     '''
         

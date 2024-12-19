@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify, send_from_directory
 import os
-from Pipelines import preprocess, emotion_pipeline, translation_pipeline_rus_eng, translation_pipeline_eng_rus, summarization_pipeline
+from Pipelines import preprocess, emotion_pipeline, translation_pipeline_rus_eng, translation_pipeline_eng_rus, summarization_pipeline, emotions_pipeline
 import json
 from Metrics import sentiment_metrics
 
@@ -28,11 +28,48 @@ def upload_audio():
 
 @app.route('/api/analyse-log', methods=['POST'])
 def analyse_log():
+    label_mapping = {
+    'annoyance': 'раздражение',
+    "admiration": "восхищение",
+    "amusement": "веселье",
+    "anger": "гнев",
+    "bother": "досада",
+    "approval": "одобрение",
+    "caring": "забота",
+    "confusion": "замешательство",
+    "curiosity": "любопытство",
+    "desire": "желание",
+    "disapproval": "неодобрение",
+    "disappointment": "разочарование",
+    "disgust": "отвращение",
+    "embarrassment": "смущение",
+    "excitement": "восторг",
+    "fear": "страх",
+    "gratitude": "благодарность",
+    "grief": "горе",
+    "joy": "радость",
+    "love": "любовь",
+    "nervousness": "тревога",
+    "optimism": "оптимизм",
+    "pride": "гордость",
+    "realization": "осознание",
+    "relief": "облегчение",
+    "remorse": "раскаяние",
+    "sadness": "грусть",
+    "surprise": "удивление",
+    "neutral": "нейтралитет"
+    }
+    
+    
     result = preprocess()
-    emotion_scores = emotion_pipeline(result)
+    print(result)
+    emotion_pars = emotions_pipeline(result, label_mapping)
+    print(emotion_pars)
+    emotion_scores = emotion_pipeline(emotion_pars)
+    
 
     response = {
-        #'sentiment_score': sentiment_score,
+        'sentiment_score': emotion_pars,
         'emotions_scores': emotion_scores
     }
 
